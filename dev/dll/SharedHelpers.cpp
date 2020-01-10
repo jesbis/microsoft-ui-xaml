@@ -206,6 +206,11 @@ bool SharedHelpers::IsIsLoadedAvailable()
     return s_isAvailable;
 }
 
+bool SharedHelpers::IsCompositionRadialGradientBrushAvailable()
+{
+    return winrt::ApiInformation::IsTypePresent(L"Windows.UI.Composition.CompositionRadialGradientBrush");    
+}
+
 template <uint16_t APIVersion> bool SharedHelpers::IsAPIContractVxAvailable()
 {
     static bool isAPIContractVxAvailableInitialized = false;

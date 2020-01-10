@@ -15,7 +15,11 @@
             <TextBlock Text="RadialGradientBrush:" />
             <Rectangle Width="250" Height="250">
                 <Rectangle.Fill>
-                    <media:RadialGradientBrush />
+                    <media:RadialGradientBrush>
+                        <GradientStop Color="Red" Offset="0" />
+                        <GradientStop Color="Blue" Offset="0.5" />
+                        <GradientStop Color="Green" Offset="1" />
+                    </media:RadialGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
         </StackPanel>

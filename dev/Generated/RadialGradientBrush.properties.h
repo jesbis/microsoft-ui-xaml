@@ -9,17 +9,35 @@ class RadialGradientBrushProperties
 public:
     RadialGradientBrushProperties();
 
-    void Placeholder(winrt::IInspectable const& value);
-    winrt::IInspectable Placeholder();
+    void EllipseCenter(winrt::float2 const& value);
+    winrt::float2 EllipseCenter();
 
-    static winrt::DependencyProperty PlaceholderProperty() { return s_PlaceholderProperty; }
+    void EllipseRadius(winrt::float2 const& value);
+    winrt::float2 EllipseRadius();
 
-    static GlobalDependencyProperty s_PlaceholderProperty;
+    void GradientOrigin(winrt::float2 const& value);
+    winrt::float2 GradientOrigin();
+
+    static winrt::DependencyProperty EllipseCenterProperty() { return s_EllipseCenterProperty; }
+    static winrt::DependencyProperty EllipseRadiusProperty() { return s_EllipseRadiusProperty; }
+    static winrt::DependencyProperty GradientOriginProperty() { return s_GradientOriginProperty; }
+
+    static GlobalDependencyProperty s_EllipseCenterProperty;
+    static GlobalDependencyProperty s_EllipseRadiusProperty;
+    static GlobalDependencyProperty s_GradientOriginProperty;
 
     static void EnsureProperties();
     static void ClearProperties();
 
-    static void OnPlaceholderPropertyChanged(
+    static void OnEllipseCenterPropertyChanged(
+        winrt::DependencyObject const& sender,
+        winrt::DependencyPropertyChangedEventArgs const& args);
+
+    static void OnEllipseRadiusPropertyChanged(
+        winrt::DependencyObject const& sender,
+        winrt::DependencyPropertyChangedEventArgs const& args);
+
+    static void OnGradientOriginPropertyChanged(
         winrt::DependencyObject const& sender,
         winrt::DependencyPropertyChangedEventArgs const& args);
 };
