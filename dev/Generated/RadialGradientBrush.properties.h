@@ -15,16 +15,21 @@ public:
     void EllipseRadius(winrt::float2 const& value);
     winrt::float2 EllipseRadius();
 
-    void GradientOrigin(winrt::float2 const& value);
-    winrt::float2 GradientOrigin();
+    void GradientOriginOffset(winrt::float2 const& value);
+    winrt::float2 GradientOriginOffset();
+
+    void MappingMode(winrt::BrushMappingMode const& value);
+    winrt::BrushMappingMode MappingMode();
 
     static winrt::DependencyProperty EllipseCenterProperty() { return s_EllipseCenterProperty; }
     static winrt::DependencyProperty EllipseRadiusProperty() { return s_EllipseRadiusProperty; }
-    static winrt::DependencyProperty GradientOriginProperty() { return s_GradientOriginProperty; }
+    static winrt::DependencyProperty GradientOriginOffsetProperty() { return s_GradientOriginOffsetProperty; }
+    static winrt::DependencyProperty MappingModeProperty() { return s_MappingModeProperty; }
 
     static GlobalDependencyProperty s_EllipseCenterProperty;
     static GlobalDependencyProperty s_EllipseRadiusProperty;
-    static GlobalDependencyProperty s_GradientOriginProperty;
+    static GlobalDependencyProperty s_GradientOriginOffsetProperty;
+    static GlobalDependencyProperty s_MappingModeProperty;
 
     static void EnsureProperties();
     static void ClearProperties();
@@ -37,7 +42,11 @@ public:
         winrt::DependencyObject const& sender,
         winrt::DependencyPropertyChangedEventArgs const& args);
 
-    static void OnGradientOriginPropertyChanged(
+    static void OnGradientOriginOffsetPropertyChanged(
+        winrt::DependencyObject const& sender,
+        winrt::DependencyPropertyChangedEventArgs const& args);
+
+    static void OnMappingModePropertyChanged(
         winrt::DependencyObject const& sender,
         winrt::DependencyPropertyChangedEventArgs const& args);
 };

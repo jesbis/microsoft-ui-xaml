@@ -18,7 +18,7 @@ RadialGradientBrush::RadialGradientBrush()
 
 winrt::IObservableVector<winrt::GradientStop> RadialGradientBrush::GradientStops()
 {
-    return m_gradientStops;
+    return m_gradientStops;    
 }
 
 void RadialGradientBrush::OnConnected()
@@ -87,9 +87,13 @@ void RadialGradientBrush::OnPropertyChanged(const winrt::DependencyPropertyChang
         {
             UpdateCompositionGradientEllipseRadius();
         }
-        else if (property == s_GradientOriginProperty)
+        else if (property == s_GradientOriginOffsetProperty)
         {
-            UpdateCompositionGradientOrigin();
+            UpdateCompositionGradientOriginOffset();
+        }
+        else if (property == s_MappingModeProperty)
+        {
+            UpdateCompositionGradientMappingMode();
         }
     }
 }
@@ -112,7 +116,7 @@ void RadialGradientBrush::EnsureCompositionBrush()
 
             UpdateCompositionGradientEllipseCenter();
             UpdateCompositionGradientEllipseRadius();
-            UpdateCompositionGradientOrigin();
+            UpdateCompositionGradientOriginOffset();
             UpdateCompositionGradientStops();
         }
         else
@@ -150,7 +154,7 @@ void RadialGradientBrush::UpdateCompositionGradientEllipseRadius()
     }
 }
 
-void RadialGradientBrush::UpdateCompositionGradientOrigin()
+void RadialGradientBrush::UpdateCompositionGradientOriginOffset()
 {
     MUX_ASSERT(SharedHelpers::IsCompositionRadialGradientBrushAvailable());
 
@@ -158,7 +162,7 @@ void RadialGradientBrush::UpdateCompositionGradientOrigin()
 
     if (compositionGradientBrush)
     {
-        compositionGradientBrush.GradientOriginOffset(GradientOrigin());
+        compositionGradientBrush.GradientOriginOffset(GradientOriginOffset());
     }
 }
 
@@ -183,6 +187,27 @@ void RadialGradientBrush::UpdateCompositionGradientStops()
             compositionStop.Offset(static_cast<float>(gradientStop.Offset()));
 
             compositionGradientBrush.ColorStops().Append(compositionStop);
+        }
+    }
+}
+
+void RadialGradientBrush::UpdateCompositionGradientMappingMode()
+{
+    MUX_ASSERT(SharedHelpers::IsCompositionRadialGradientBrushAvailable());
+
+    auto compositionGradientBrush = m_brush.try_as<winrt::CompositionRadialGradientBrush>();
+
+    if (compositionGradientBrush)
+    {
+        switch (MappingMode())
+        {
+            case winrt::BrushMappingMode::Absolute:
+                compositionGradientBrush.MappingMode(winrt::Windows::UI::Composition::CompositionMappingMode::Absolute);
+                break;
+
+            case winrt::BrushMappingMode::RelativeToBoundingBox:
+                compositionGradientBrush.MappingMode(winrt::Windows::UI::Composition::CompositionMappingMode::Relative);
+                break;
         }
     }
 }

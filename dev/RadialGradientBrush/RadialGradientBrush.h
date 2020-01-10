@@ -45,8 +45,9 @@ private:
     void EnsureCompositionBrush();
     void UpdateCompositionGradientEllipseCenter();
     void UpdateCompositionGradientEllipseRadius();
-    void UpdateCompositionGradientOrigin();
+    void UpdateCompositionGradientOriginOffset();
     void UpdateCompositionGradientStops();
+    void UpdateCompositionGradientMappingMode();
 
     void UpdateFallbackBrush();
 };
