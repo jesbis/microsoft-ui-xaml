@@ -144,7 +144,7 @@ void RadialGradientBrush::UpdateCompositionGradientEllipseCenter()
 
     if (compositionGradientBrush)
     {
-        compositionGradientBrush.EllipseCenter(EllipseCenter());
+        compositionGradientBrush.EllipseCenter(winrt::float2(EllipseCenter().X, EllipseCenter().Y));
     }
 }
 
@@ -156,7 +156,7 @@ void RadialGradientBrush::UpdateCompositionGradientEllipseRadius()
 
     if (compositionGradientBrush)
     {
-        compositionGradientBrush.EllipseRadius(EllipseRadius());
+        compositionGradientBrush.EllipseRadius(winrt::float2(EllipseRadius().X, EllipseRadius().Y));
     }
 }
 
@@ -189,7 +189,7 @@ void RadialGradientBrush::UpdateCompositionGradientOriginOffset()
 
     if (compositionGradientBrush)
     {
-        compositionGradientBrush.GradientOriginOffset(GradientOriginOffset());
+        compositionGradientBrush.GradientOriginOffset(winrt::float2(GradientOriginOffset().X, GradientOriginOffset().Y));
     }
 }
 

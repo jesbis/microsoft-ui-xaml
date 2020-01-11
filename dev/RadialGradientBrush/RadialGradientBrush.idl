@@ -10,13 +10,13 @@ unsealed runtimeclass RadialGradientBrush : Windows.UI.Xaml.Media.XamlCompositio
 {
     RadialGradientBrush();
 
-    [MUX_DEFAULT_VALUE("winrt::float2(0.5,0.5)")]
-    Windows.Foundation.Numerics.Vector2 EllipseCenter { get; set; };
+    [MUX_DEFAULT_VALUE("winrt::Point(0.5,0.5)")]
+    Windows.Foundation.Point EllipseCenter { get; set; };
 
-    [MUX_DEFAULT_VALUE("winrt::float2(0.5,0.5)")]
-    Windows.Foundation.Numerics.Vector2 EllipseRadius { get; set; };
+    [MUX_DEFAULT_VALUE("winrt::Point(0.5,0.5)")]
+    Windows.Foundation.Point EllipseRadius { get; set; };
 
-    Windows.Foundation.Numerics.Vector2 GradientOriginOffset { get; set; };
+    Windows.Foundation.Point GradientOriginOffset { get; set; };
 
     [MUX_DEFAULT_VALUE("winrt::BrushMappingMode::RelativeToBoundingBox")]
     Windows.UI.Xaml.Media.BrushMappingMode MappingMode { get; set; };

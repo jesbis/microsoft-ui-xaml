@@ -185,11 +185,11 @@ namespace MUXControlsTestApp
             {
                 if (gradientBrush.MappingMode == BrushMappingMode.Absolute)
                 {
-                    gradientBrush.GradientOriginOffset = new Vector2((float)_random.Next(0, 100), (float)_random.Next(0, 100));
+                    gradientBrush.GradientOriginOffset = new Point(_random.Next(0, 100), _random.Next(0, 100));
                 }
                 else
                 {
-                    gradientBrush.GradientOriginOffset = new Vector2(_random.Next(-100, 100) / 100f, _random.Next(-100, 100) / 100f);
+                    gradientBrush.GradientOriginOffset = new Point(_random.Next(-100, 100) / 100f, _random.Next(-100, 100) / 100f);
                 }
             }
         }
@@ -200,11 +200,11 @@ namespace MUXControlsTestApp
             {
                 if (gradientBrush.MappingMode == BrushMappingMode.Absolute)
                 {
-                    gradientBrush.EllipseCenter = new Vector2((float)_random.Next(0, 100), (float)_random.Next(0, 100));
+                    gradientBrush.EllipseCenter = new Point(_random.Next(0, 100), _random.Next(0, 100));
                 }
                 else
                 {
-                    gradientBrush.EllipseCenter = new Vector2((float)_random.NextDouble(), (float)_random.NextDouble());
+                    gradientBrush.EllipseCenter = new Point(_random.NextDouble(), _random.NextDouble());
                 }
             }
         }
@@ -215,11 +215,11 @@ namespace MUXControlsTestApp
             {
                 if (gradientBrush.MappingMode == BrushMappingMode.Absolute)
                 {
-                    gradientBrush.EllipseRadius = new Vector2((float)_random.Next(10, 200), (float)_random.Next(10, 200));
+                    gradientBrush.EllipseRadius = new Point(_random.Next(10, 200), _random.Next(10, 200));
                 }
                 else
                 {
-                    gradientBrush.EllipseRadius = new Vector2((float)_random.NextDouble(), (float)_random.NextDouble());
+                    gradientBrush.EllipseRadius = new Point(_random.NextDouble(), _random.NextDouble());
                 }
             }
         }

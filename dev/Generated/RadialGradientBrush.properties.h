@@ -9,14 +9,14 @@ class RadialGradientBrushProperties
 public:
     RadialGradientBrushProperties();
 
-    void EllipseCenter(winrt::float2 const& value);
-    winrt::float2 EllipseCenter();
+    void EllipseCenter(winrt::Point const& value);
+    winrt::Point EllipseCenter();
 
-    void EllipseRadius(winrt::float2 const& value);
-    winrt::float2 EllipseRadius();
+    void EllipseRadius(winrt::Point const& value);
+    winrt::Point EllipseRadius();
 
-    void GradientOriginOffset(winrt::float2 const& value);
-    winrt::float2 GradientOriginOffset();
+    void GradientOriginOffset(winrt::Point const& value);
+    winrt::Point GradientOriginOffset();
 
     void InterpolationSpace(winrt::CompositionColorSpace const& value);
     winrt::CompositionColorSpace InterpolationSpace();
