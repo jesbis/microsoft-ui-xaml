@@ -17,7 +17,7 @@
                 <GradientStop Color="Green" Offset="0.5" />
                 <GradientStop Color="Blue" Offset="1" />
             </media:RadialGradientBrush>
-
+            
             <Style TargetType="Border">
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="BorderBrush" Value="Black" />
@@ -96,6 +96,8 @@
                             <Button x:Name="RandomizeEllipseRadiusButton" AutomationProperties.Name="RandomizeEllipseRadiusButton" Content="Randomize radius" Click="RandomizeEllipseRadiusButton_Click" />
                             <Button x:Name="ToggleMappingModeButton" AutomationProperties.Name="ToggleMappingModeButton" Content="Toggle mapping mode" Click="ToggleMappingModeButton_Click" />
                         </StackPanel>
+
+                        <ComboBox x:Name="InterpolationColorSpaceComboBox" AutomationProperties.Name="InterpolationColorSpaceComboBox" Header="Space: ({Auto, Rgb, RgbLinear} only)" ItemsSource="{x:Bind GetColorSpaceValueNames(), Mode=OneTime}" SelectedItem="{x:Bind DynamicGradientBrushInterpolationSpace, Mode=TwoWay}" />
 
                         <Rectangle x:Name="RectangleWithDynamicGradient" Width="200" Height="200" Fill="Gray" />
                         <TextBlock x:Name="TextBlockWithDynamicGradient" Text="Text with random gradient foreground" FontSize="20" Foreground="Gray" />

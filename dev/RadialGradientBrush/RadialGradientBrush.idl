@@ -21,13 +21,17 @@ unsealed runtimeclass RadialGradientBrush : Windows.UI.Xaml.Media.XamlCompositio
     [MUX_DEFAULT_VALUE("winrt::BrushMappingMode::RelativeToBoundingBox")]
     Windows.UI.Xaml.Media.BrushMappingMode MappingMode { get; set; };
 
+    [MUX_DEFAULT_VALUE("winrt::Windows::UI::Composition::CompositionColorSpace::Auto")]
+    Windows.UI.Composition.CompositionColorSpace InterpolationSpace { get; set; };
+
     [MUX_PROPERTY_CHANGED_CALLBACK(FALSE)]
     Windows.Foundation.Collections.IObservableVector<Windows.UI.Xaml.Media.GradientStop> GradientStops { get; };
 
-    static Windows.UI.Xaml.DependencyProperty EllipseCenterProperty{ get; };
-    static Windows.UI.Xaml.DependencyProperty EllipseRadiusProperty{ get; };
-    static Windows.UI.Xaml.DependencyProperty GradientOriginOffsetProperty{ get; };
-    static Windows.UI.Xaml.DependencyProperty MappingModeProperty{ get; };
+    static Windows.UI.Xaml.DependencyProperty EllipseCenterProperty { get; };
+    static Windows.UI.Xaml.DependencyProperty EllipseRadiusProperty { get; };
+    static Windows.UI.Xaml.DependencyProperty GradientOriginOffsetProperty { get; };
+    static Windows.UI.Xaml.DependencyProperty InterpolationSpaceProperty { get; };
+    static Windows.UI.Xaml.DependencyProperty MappingModeProperty { get; };
 }
 
 }

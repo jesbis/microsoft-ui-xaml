@@ -5,15 +5,8 @@
 
 #include "pch.h"
 #include "common.h"
-
 #include "RadialGradientBrush.g.h"
 #include "RadialGradientBrush.properties.h"
-
-/*  TODO:
-    1.  Is it worth versioning to implement Windows.UI.Composition.IAnimationObject on 1809+ in order to better support animation?
-        We could also revisit once IAnimationObject is available downlevel in WinUI 3.
-    2.  Is it worth using D2D to provide a fallback gradient downlevel? Device resources are expensive.
-*/
 
 class RadialGradientBrush :
     public ReferenceTracker<RadialGradientBrush, winrt::implementation::RadialGradientBrushT>,
@@ -43,11 +36,13 @@ private:
     void OnFallbackColorChanged(const winrt::DependencyObject& sender, const winrt::DependencyProperty& args);
 
     void EnsureCompositionBrush();
+
     void UpdateCompositionGradientEllipseCenter();
     void UpdateCompositionGradientEllipseRadius();
+    void UpdateCompositionGradientMappingMode();
     void UpdateCompositionGradientOriginOffset();
     void UpdateCompositionGradientStops();
-    void UpdateCompositionGradientMappingMode();
+    void UpdateCompositionInterpolationSpace();
 
     void UpdateFallbackBrush();
 };

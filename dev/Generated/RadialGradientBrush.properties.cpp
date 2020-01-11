@@ -16,6 +16,7 @@ namespace winrt::Microsoft::UI::Xaml::Media
 GlobalDependencyProperty RadialGradientBrushProperties::s_EllipseCenterProperty{ nullptr };
 GlobalDependencyProperty RadialGradientBrushProperties::s_EllipseRadiusProperty{ nullptr };
 GlobalDependencyProperty RadialGradientBrushProperties::s_GradientOriginOffsetProperty{ nullptr };
+GlobalDependencyProperty RadialGradientBrushProperties::s_InterpolationSpaceProperty{ nullptr };
 GlobalDependencyProperty RadialGradientBrushProperties::s_MappingModeProperty{ nullptr };
 
 RadialGradientBrushProperties::RadialGradientBrushProperties()
@@ -58,6 +59,17 @@ void RadialGradientBrushProperties::EnsureProperties()
                 ValueHelper<winrt::float2>::BoxedDefaultValue(),
                 winrt::PropertyChangedCallback(&OnGradientOriginOffsetPropertyChanged));
     }
+    if (!s_InterpolationSpaceProperty)
+    {
+        s_InterpolationSpaceProperty =
+            InitializeDependencyProperty(
+                L"InterpolationSpace",
+                winrt::name_of<winrt::CompositionColorSpace>(),
+                winrt::name_of<winrt::RadialGradientBrush>(),
+                false /* isAttached */,
+                ValueHelper<winrt::CompositionColorSpace>::BoxValueIfNecessary(winrt::Windows::UI::Composition::CompositionColorSpace::Auto),
+                winrt::PropertyChangedCallback(&OnInterpolationSpacePropertyChanged));
+    }
     if (!s_MappingModeProperty)
     {
         s_MappingModeProperty =
@@ -76,6 +88,7 @@ void RadialGradientBrushProperties::ClearProperties()
     s_EllipseCenterProperty = nullptr;
     s_EllipseRadiusProperty = nullptr;
     s_GradientOriginOffsetProperty = nullptr;
+    s_InterpolationSpaceProperty = nullptr;
     s_MappingModeProperty = nullptr;
 }
 
@@ -96,6 +109,14 @@ void RadialGradientBrushProperties::OnEllipseRadiusPropertyChanged(
 }
 
 void RadialGradientBrushProperties::OnGradientOriginOffsetPropertyChanged(
+    winrt::DependencyObject const& sender,
+    winrt::DependencyPropertyChangedEventArgs const& args)
+{
+    auto owner = sender.as<winrt::RadialGradientBrush>();
+    winrt::get_self<RadialGradientBrush>(owner)->OnPropertyChanged(args);
+}
+
+void RadialGradientBrushProperties::OnInterpolationSpacePropertyChanged(
     winrt::DependencyObject const& sender,
     winrt::DependencyPropertyChangedEventArgs const& args)
 {
@@ -139,6 +160,16 @@ void RadialGradientBrushProperties::GradientOriginOffset(winrt::float2 const& va
 winrt::float2 RadialGradientBrushProperties::GradientOriginOffset()
 {
     return ValueHelper<winrt::float2>::CastOrUnbox(static_cast<RadialGradientBrush*>(this)->GetValue(s_GradientOriginOffsetProperty));
+}
+
+void RadialGradientBrushProperties::InterpolationSpace(winrt::CompositionColorSpace const& value)
+{
+    static_cast<RadialGradientBrush*>(this)->SetValue(s_InterpolationSpaceProperty, ValueHelper<winrt::CompositionColorSpace>::BoxValueIfNecessary(value));
+}
+
+winrt::CompositionColorSpace RadialGradientBrushProperties::InterpolationSpace()
+{
+    return ValueHelper<winrt::CompositionColorSpace>::CastOrUnbox(static_cast<RadialGradientBrush*>(this)->GetValue(s_InterpolationSpaceProperty));
 }
 
 void RadialGradientBrushProperties::MappingMode(winrt::BrushMappingMode const& value)

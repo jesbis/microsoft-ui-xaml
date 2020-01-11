@@ -14,6 +14,8 @@ using System.Numerics;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Foundation;
 using Windows.Foundation.Metadata;
+using Windows.UI.Composition;
+using Windows.UI.Xaml.Data;
 
 #if !BUILD_WINDOWS
 using RadialGradientBrush = Microsoft.UI.Xaml.Media.RadialGradientBrush;
@@ -29,11 +31,38 @@ namespace MUXControlsTestApp
 
         public RadialGradientBrushPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _random = new Random();
         }
 
-        public void ReplaceGradientButton_Click(object sender, RoutedEventArgs e)
+        public string[] GetColorSpaceValueNames()
+        {
+            return Enum.GetNames(typeof(CompositionColorSpace));
+        }
+
+        public string DynamicGradientBrushInterpolationSpace
+        {
+            get
+            {
+                if (DynamicGradientBrush != null)
+                {
+                    return DynamicGradientBrush.InterpolationSpace.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (DynamicGradientBrush != null && value != null)
+                {
+                    DynamicGradientBrush.InterpolationSpace = (CompositionColorSpace)Enum.Parse(typeof(CompositionColorSpace), value);
+                }
+            }
+        }
+
+        private void ReplaceGradientButton_Click(object sender, RoutedEventArgs e)
         {
             DynamicGradientBrush = new RadialGradientBrush();
             DynamicGradientBrush.FallbackColor = Color.FromArgb(Byte.MaxValue, (byte)_random.Next(256), (byte)_random.Next(256), (byte)_random.Next(256));
@@ -53,37 +82,37 @@ namespace MUXControlsTestApp
             Bindings.Update();
         }
 
-        public void AddGradientStopButton_Click(object sender, RoutedEventArgs e)
+        private void AddGradientStopButton_Click(object sender, RoutedEventArgs e)
         {
             AddRandomGradientStop(DynamicGradientBrush);
         }
 
-        public void RemoveGradientStopButton_Click(object sender, RoutedEventArgs e)
+        private void RemoveGradientStopButton_Click(object sender, RoutedEventArgs e)
         {
             RemoveRandomGradientStop(DynamicGradientBrush);
         }
 
-        public void RandomizeGradientOriginButton_Click(object sender, RoutedEventArgs e)
+        private void RandomizeGradientOriginButton_Click(object sender, RoutedEventArgs e)
         {
             RandomizeGradientOriginOffset(DynamicGradientBrush);
         }
 
-        public void RandomizeEllipseCenterButton_Click(object sender, RoutedEventArgs e)
+        private void RandomizeEllipseCenterButton_Click(object sender, RoutedEventArgs e)
         {
             RandomizeEllipseCenter(DynamicGradientBrush);
         }
 
-        public void RandomizeEllipseRadiusButton_Click(object sender, RoutedEventArgs e)
+        private void RandomizeEllipseRadiusButton_Click(object sender, RoutedEventArgs e)
         {
             RandomizeEllipseRadius(DynamicGradientBrush);
         }
 
-        public void ToggleMappingModeButton_Click(object sender, RoutedEventArgs e)
+        private void ToggleMappingModeButton_Click(object sender, RoutedEventArgs e)
         {
             ToggleMappingMode(DynamicGradientBrush);
         }
 
-        public async void GenerateRenderTargetBitmapButton_Click(object sender, RoutedEventArgs e)
+        private async void GenerateRenderTargetBitmapButton_Click(object sender, RoutedEventArgs e)
         {
             var rtb = new RenderTargetBitmap();
             await rtb.RenderAsync(GradientRectangle);
@@ -119,6 +148,14 @@ namespace MUXControlsTestApp
                 {
                     ColorMatchTestResult.Text = "Failed";
                 }
+            }
+        }
+
+        private void InterpolationColorSpaceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DynamicGradientBrush != null && e.AddedItems.Count > 0)
+            {
+                DynamicGradientBrush.InterpolationSpace = (CompositionColorSpace)Enum.Parse(typeof(CompositionColorSpace), e.AddedItems[0].ToString());
             }
         }
 
